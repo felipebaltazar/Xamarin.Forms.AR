@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="MSBuild.Sdk.Extras/2.1.2">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid10.0;</TargetFrameworks>
+    <AssemblyName>Xamarin.Forms.AR</AssemblyName>
+    <RootNamespace>Xamarin.Forms.AR</RootNamespace>
+    <PackageId>Xamarin.Forms.AR</PackageId>
+    <Summary></Summary>
+    <PackageTag></PackageTag>
+    <Title>Xamarin.Forms.AR</Title>
+    <Description></Description>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+    <Version>1.0.0</Version>
+    <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
+    <Authors>Felipe Baltazar</Authors>
+    <Owners>Felipe Baltazar</Owners>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl></PackageProjectUrl>
+    <DebugType>portable</DebugType>
+    <Configurations>Debug;Release</Configurations>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <!-- Manage TargetFrameworks for development (Debug Mode) -->
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <!-- Manage TargetFrameworks for distribution (Release Mode) -->
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(Configuration)'=='Release' ">
+    <!-- Manage Packages for distribution -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Build.TypeRedirector" Version="0.1.2-preview" PrivateAssets="all" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />
+    <Compile Include="**/*.shared.cs" />
+    <Compile Include="**/*.shared.*.cs" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <PackageReference Include="Xamarin.Google.ARCore" Version="1.26.0" />
+    <PackageReference Include="JavaGl.Obj" Version="0.3.0.2" />
+    <Compile Include="**\*.android.cs" />
+    <Compile Include="**\*.android.*.cs" />
+    <!--Resources-->
+    <AndroidResource Include="Resources\**\*.axml" />
+    <AndroidResource Include="Resources\**\*.xml" />
+    <AndroidResource Include="Resources\**\*.png" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <Compile Include="**\*.ios.cs" />
+    <Compile Include="**\*.ios.*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="build\*.cs" />
+    <None Include="build\**\*.cs;build\**\*.targets" Pack="true" PackagePath="build" />
+  </ItemGroup>
+</Project>
