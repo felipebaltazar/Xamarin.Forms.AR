@@ -103,7 +103,7 @@ namespace Xamarin.Forms.AR.Helpers
                         var line = string.Empty;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            var tokens = line.Split(" ", -1);
+                            var tokens = line.Split(" ");
                             if (tokens[0].Equals("#include"))
                             {
                                 var includeFilename = tokens[1];

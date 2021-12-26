@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.App;
 using Android.Content;
 using Android.Hardware.Camera2;
 using Android.Hardware.Display;
@@ -17,12 +18,12 @@ namespace Xamarin.Forms.AR
         private readonly DisplayManager displayManager;
         private readonly CameraManager cameraManager;
 
-        public DisplayRotationHelper(Context context): base()
+        public DisplayRotationHelper(Activity context): base()
         {
             displayManager = (DisplayManager)context.GetSystemService(Context.DisplayService);
             cameraManager = (CameraManager)context.GetSystemService(Context.CameraService);
 
-            var windowManager = (IWindowManager)context.GetSystemService(Context.WindowService);
+            var windowManager = context.WindowManager;
             display = windowManager.DefaultDisplay;
         }
 

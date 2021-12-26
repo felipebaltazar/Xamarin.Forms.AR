@@ -13,6 +13,7 @@ namespace Xamarin.Forms.AR.Models
         // Shader names.
         private const string CAMERA_VERTEX_SHADER_NAME = "shaders/screenquad.vert";
         private const string CAMERA_FRAGMENT_SHADER_NAME = "shaders/screenquad.frag";
+
         private const string DEPTH_VISUALIZER_VERTEX_SHADER_NAME =
             "shaders/background_show_depth_color_visualization.vert";
         private const string DEPTH_VISUALIZER_FRAGMENT_SHADER_NAME =
@@ -83,47 +84,43 @@ namespace Xamarin.Forms.AR.Models
             quadTexCoords = bbTexCoordsTransformed.AsFloatBuffer();
 
             // Load render camera feed shader.
-            {
-                var vertexShader =
-                    ShaderHelper.LoadGLShader(context, GLES20.GlVertexShader, CAMERA_VERTEX_SHADER_NAME);
-                var fragmentShader =
-                    ShaderHelper.LoadGLShader(
-                        context, GLES20.GlFragmentShader, CAMERA_FRAGMENT_SHADER_NAME);
+            var vertexShader =
+                ShaderHelper.LoadGLShader(context, GLES20.GlVertexShader, CAMERA_VERTEX_SHADER_NAME);
+            var fragmentShader =
+                ShaderHelper.LoadGLShader(
+                    context, GLES20.GlFragmentShader, CAMERA_FRAGMENT_SHADER_NAME);
 
-                cameraProgram = GLES20.GlCreateProgram();
-                GLES20.GlAttachShader(cameraProgram, vertexShader);
-                GLES20.GlAttachShader(cameraProgram, fragmentShader);
-                GLES20.GlLinkProgram(cameraProgram);
-                GLES20.GlUseProgram(cameraProgram);
-                cameraPositionAttrib = GLES20.GlGetAttribLocation(cameraProgram, "a_Position");
-                cameraTexCoordAttrib = GLES20.GlGetAttribLocation(cameraProgram, "a_TexCoord");
-                ShaderHelper.CheckGLError("", "Program creation");
+            cameraProgram = GLES20.GlCreateProgram();
+            GLES20.GlAttachShader(cameraProgram, vertexShader);
+            GLES20.GlAttachShader(cameraProgram, fragmentShader);
+            GLES20.GlLinkProgram(cameraProgram);
+            GLES20.GlUseProgram(cameraProgram);
+            cameraPositionAttrib = GLES20.GlGetAttribLocation(cameraProgram, "a_Position");
+            cameraTexCoordAttrib = GLES20.GlGetAttribLocation(cameraProgram, "a_TexCoord");
+            ShaderHelper.CheckGLError("", "Program creation");
 
-                cameraTextureUniform = GLES20.GlGetUniformLocation(cameraProgram, "sTexture");
-                ShaderHelper.CheckGLError("", "Program parameters");
-            }
+            cameraTextureUniform = GLES20.GlGetUniformLocation(cameraProgram, "sTexture");
+            ShaderHelper.CheckGLError("", "Program parameters");
 
             // Load render depth map shader.
-            {
-                var vertexShader =
-                    ShaderHelper.LoadGLShader(
-                        context, GLES20.GlVertexShader, DEPTH_VISUALIZER_VERTEX_SHADER_NAME);
-                var fragmentShader =
-                    ShaderHelper.LoadGLShader(
-                        context, GLES20.GlFragmentShader, DEPTH_VISUALIZER_FRAGMENT_SHADER_NAME);
+            vertexShader =
+                ShaderHelper.LoadGLShader(
+                    context, GLES20.GlVertexShader, DEPTH_VISUALIZER_VERTEX_SHADER_NAME);
+            fragmentShader =
+                ShaderHelper.LoadGLShader(
+                    context, GLES20.GlFragmentShader, DEPTH_VISUALIZER_FRAGMENT_SHADER_NAME);
 
-                depthProgram = GLES20.GlCreateProgram();
-                GLES20.GlAttachShader(depthProgram, vertexShader);
-                GLES20.GlAttachShader(depthProgram, fragmentShader);
-                GLES20.GlLinkProgram(depthProgram);
-                GLES20.GlUseProgram(depthProgram);
-                depthPositionAttrib = GLES20.GlGetAttribLocation(depthProgram, "a_Position");
-                depthTexCoordAttrib = GLES20.GlGetAttribLocation(depthProgram, "a_TexCoord");
-                ShaderHelper.CheckGLError("", "Program creation");
+            depthProgram = GLES20.GlCreateProgram();
+            GLES20.GlAttachShader(depthProgram, vertexShader);
+            GLES20.GlAttachShader(depthProgram, fragmentShader);
+            GLES20.GlLinkProgram(depthProgram);
+            GLES20.GlUseProgram(depthProgram);
+            depthPositionAttrib = GLES20.GlGetAttribLocation(depthProgram, "a_Position");
+            depthTexCoordAttrib = GLES20.GlGetAttribLocation(depthProgram, "a_TexCoord");
+            ShaderHelper.CheckGLError("", "Program creation");
 
-                depthTextureUniform = GLES20.GlGetUniformLocation(depthProgram, "u_DepthTexture");
-                ShaderHelper.CheckGLError("", "Program parameters");
-            }
+            depthTextureUniform = GLES20.GlGetUniformLocation(depthProgram, "u_DepthTexture");
+            ShaderHelper.CheckGLError("", "Program parameters");
 
             this.depthTextureId = depthTextureId;
         }

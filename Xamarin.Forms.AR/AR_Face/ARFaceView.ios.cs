@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Xamarin.Forms.AR.Platform.iOS
+﻿namespace Xamarin.Forms.AR.Platform.iOS
 {
-    public class ARFaceView
+    public class ARFaceViewRenderer
     {
     }
 }

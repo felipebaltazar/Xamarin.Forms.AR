@@ -1,0 +1,6 @@
+﻿<Project>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)PreserveXamarinFormsAR.shared.cs"
+             Visible="false" />
+  </ItemGroup>
+</Project>

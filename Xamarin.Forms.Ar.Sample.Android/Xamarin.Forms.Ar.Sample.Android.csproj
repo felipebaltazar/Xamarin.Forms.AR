@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -62,6 +62,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\models\anchor.obj" />
+    <AndroidAsset Include="Assets\models\andy.obj" />
+    <AndroidAsset Include="Assets\models\andy_shadow.obj" />
+    <AndroidAsset Include="Assets\models\forehead_left.obj" />
+    <AndroidAsset Include="Assets\models\forehead_right.obj" />
+    <AndroidAsset Include="Assets\models\map_quality_bar.obj" />
+    <AndroidAsset Include="Assets\models\nose.obj" />
+    <AndroidAsset Include="Assets\shaders\ar_object.frag" />
+    <AndroidAsset Include="Assets\shaders\ar_object.vert" />
+    <AndroidAsset Include="Assets\shaders\background_show_depth_color_visualization.frag" />
+    <AndroidAsset Include="Assets\shaders\background_show_depth_color_visualization.vert" />
+    <AndroidAsset Include="Assets\shaders\object.frag" />
+    <AndroidAsset Include="Assets\shaders\object.vert" />
+    <AndroidAsset Include="Assets\shaders\plane.frag" />
+    <AndroidAsset Include="Assets\shaders\plane.vert" />
+    <AndroidAsset Include="Assets\shaders\point_cloud.frag" />
+    <AndroidAsset Include="Assets\shaders\point_cloud.vert" />
+    <AndroidAsset Include="Assets\shaders\screenquad.frag" />
+    <AndroidAsset Include="Assets\shaders\screenquad.vert" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -90,6 +109,37 @@
       <Project>{013985A7-C367-4FB7-A8A7-FB5AB2D4AC07}</Project>
       <Name>Xamarin.Forms.Ar.Sample</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Forms.AR\Xamarin.Forms.AR.csproj">
+      <Project>{94e5afd6-123e-46f8-aa6f-5cda97657a78}</Project>
+      <Name>Xamarin.Forms.AR</Name>
+    </ProjectReference>
   </ItemGroup>
- <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\anchor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\andy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\andy_shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\andy_spec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\ear_fur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\freckles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\map_quality_bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\nose_fur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\models\trigrid.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
