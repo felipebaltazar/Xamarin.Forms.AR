@@ -81,6 +81,9 @@
     <AndroidAsset Include="Assets\shaders\point_cloud.vert" />
     <AndroidAsset Include="Assets\shaders\screenquad.frag" />
     <AndroidAsset Include="Assets\shaders\screenquad.vert" />
+    <AndroidAsset Include="Assets\models\football_helmet.sfb" />
+    <AndroidAsset Include="Assets\models\glasses.sfb" />
+    <AndroidAsset Include="Assets\models\Glasses_01.sfb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

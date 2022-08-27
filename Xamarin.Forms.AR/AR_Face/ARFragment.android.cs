@@ -289,18 +289,28 @@ namespace Xamarin.Forms.AR.Platform.Android
                 backgroundRenderer.CreateOnGlThread(Context);
                 augmentedFaceRenderer.CreateOnGlThread(Context, "models/freckles.png");
                 augmentedFaceRenderer.SetMaterialProperties(0.0f, 1.0f, 0.1f, 6.0f);
-                noseObject.CreateOnGlThread(Context, "models/nose.obj", "models/nose_fur.png");
-                noseObject.SetMaterialProperties(0.0f, 1.0f, 0.1f, 6.0f);
-                noseObject.SetBlendMode(BlendMode.AlphaBlending);
-                rightEarObject.CreateOnGlThread(Context, "models/forehead_right.obj", "models/ear_fur.png");
-                rightEarObject.SetMaterialProperties(0.0f, 1.0f, 0.1f, 6.0f);
-                rightEarObject.SetBlendMode(BlendMode.AlphaBlending);
-                leftEarObject.CreateOnGlThread(Context, "models/forehead_left.obj", "models/ear_fur.png");
-                leftEarObject.SetMaterialProperties(0.0f, 1.0f, 0.1f, 6.0f);
-                leftEarObject.SetBlendMode(BlendMode.AlphaBlending);
+
+                TryCreateTexture(noseObject, "models/nose.obj", "models/nose_fur.png");
+                TryCreateTexture(rightEarObject, "models/forehead_right.obj", "models/ear_fur.png");
+                TryCreateTexture(leftEarObject, "models/forehead_left.obj", "models/ear_fur.png");
+
 
             }
-            catch (IOException e)
+            catch (Exception e)
+            {
+                System.Console.Write(e);
+            }
+        }
+
+        private void TryCreateTexture(ObjectRenderer renderer, string objectName, string assetTexture)
+        {
+            try
+            {
+                renderer.CreateOnGlThread(Context, objectName, assetTexture);
+                renderer.SetMaterialProperties(0.0f, 1.0f, 0.1f, 6.0f);
+                //renderer.SetBlendMode(BlendMode.AlphaBlending);
+            }
+            catch
             {
             }
         }

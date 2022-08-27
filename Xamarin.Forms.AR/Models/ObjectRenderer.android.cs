@@ -135,10 +135,10 @@ namespace Xamarin.Forms.AR.Models
             // that OpenGL understands.
 
             // Obtain the data from the OBJ, as direct buffers:
-            var wideIndices = ObjData.GetFaceVertexIndices(obj, 3);
-            var vertices = ObjData.GetVertices(obj);
-            var texCoords = ObjData.GetTexCoords(obj, 2);
-            var normals = ObjData.GetNormals(obj);
+            var wideIndices = TryGet(()=> ObjData.GetFaceVertexIndices(obj, 3), null);
+            var vertices = TryGet(() => ObjData.GetVertices(obj), null);
+            var texCoords = TryGet(() => ObjData.GetTexCoords(obj, 2), null);
+            var normals = TryGet(() => ObjData.GetNormals(obj), null);
 
             // Convert int indices to shorts for GL ES 2.0 compatibility
             var indices =
@@ -160,7 +160,7 @@ namespace Xamarin.Forms.AR.Models
             verticesBaseAddress = 0;
             texCoordsBaseAddress = verticesBaseAddress + 4 * vertices.Limit();
             normalsBaseAddress = texCoordsBaseAddress + 4 * texCoords.Limit();
-            var totalBytes = normalsBaseAddress + 4 * normals.Limit();
+            var totalBytes = normalsBaseAddress + 4 * (normals?.Limit() ?? 1);
 
             GLES20.GlBindBuffer(GLES20.GlArrayBuffer, vertexBufferId);
             GLES20.GlBufferData(GLES20.GlArrayBuffer, totalBytes, null, GLES20.GlStaticDraw);
@@ -171,7 +171,7 @@ namespace Xamarin.Forms.AR.Models
                 GLES20.GlArrayBuffer, texCoordsBaseAddress, 4 * texCoords.Limit(), texCoords);
 
             GLES20.GlBufferSubData(
-                GLES20.GlArrayBuffer, normalsBaseAddress, 4 * normals.Limit(), normals);
+                GLES20.GlArrayBuffer, normalsBaseAddress, 4 * (normals?.Limit() ?? 1), normals);
 
             GLES20.GlBindBuffer(GLES20.GlArrayBuffer, 0);
 
@@ -185,6 +185,20 @@ namespace Xamarin.Forms.AR.Models
             ShaderHelper.CheckGLError("", "OBJ buffer load");
 
             Matrix.SetIdentityM(modelMatrix, 0);
+        }
+
+        private T TryGet<T>(Func<T> getter, T defaultValue)
+        {
+            try
+            {
+                var value = getter();
+                return value;
+            }
+            catch
+            {
+            }
+
+            return defaultValue;
         }
 
         /**
